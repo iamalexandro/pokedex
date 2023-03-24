@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600,800");
+
+.login {
+  font-family: "Montserrat", sans-serif;
+  // font-weight: bold;
+  height: 100vh;
+  width: 100vw;
+  background: #f6f5f7;
+  display: flex;
+}
+
+.login-modal {
+  width: 55vw;
+  height: 60vh;
+  background: white;
+  margin: 15vh auto;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+  display: flex;
+
+  &__left,
+  &__right {
+    padding: 2rem;
+    font-weight: 700;
+  }
+
+  &__left {
+    padding-top: 10rem;
+  }
+
+  &__input {
+    width: -webkit-fill-available;
+    font-size: 16px;
+    padding: 1rem;
+  }
+
+  &__right {
+    padding-top: 8rem;
+    border-radius: 0 10px 10px 0;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    color: white;
+  }
+
+  &__subtitle {
+    font-size: 22px;
+    font-weight: 400;
+    margin-top: 3rem;
+  }
+
+  &__btn {
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    border: none;
+    padding: 5px 30px;
+    transition: transform 0.3s;
+
+    &:hover {
+      transition: transform 0.3s;
+      transform: scale(1.05);
+      border: solid 2px #ff416c;
+      background: white;
+      color: #ff416c;
+    }
+  }
+}
+
+.pikachu {
+  width: 15rem;
+}
+
+.pokedex-logo {
+  position: absolute;
+  bottom: 4rem;
+  right: 4rem;
+  width: 12rem;
+  transform: rotate(10deg);
+  animation: pokedex-logo 0.6s infinite alternate linear;
+  @keyframes pokedex-logo {
+    to {
+      transform: translate(0, 1rem) rotate(10deg);
+    }
+  }
+}
