@@ -1,28 +1,20 @@
 import React, { useState } from "react";
-import users from "./data/users";
+import { useNavigate } from "react-router-dom";
+import users from "../data/users";
 //libraries
-// import axios from "axios";
 
 //styles
-import "./Login.scss";
-import "../src/index.scss";
+import "./styles/Login.scss";
+import "../index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 //sources
-import pokedex from "./images/poke.png";
-import pikachu from "./images/pikachu.png";
-
-// pokedex conection
-// const bringPokemons = () => {
-//   axios({
-//     method: "get",
-//     url: "https://pokeapi.co/api/v2/pokemon/ditto",
-//   }).then(function (response) {
-//     console.log(response);
-//   });
-// };
+import pokedex from "../images/poke.png";
+import pikachu from "../images/pikachu.png";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,7 +29,9 @@ export const Login = () => {
     } else if (user && passwordValidated) {
       console.log("user logged");
       const token = user.token;
+      localStorage.setItem("token", token);
       console.log("token: ", token);
+      navigate("/dashboard");
     }
   };
 
