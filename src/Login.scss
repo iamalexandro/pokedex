@@ -10,13 +10,18 @@
 }
 
 .login-modal {
-  width: 55vw;
-  height: 60vh;
+  width: 80%;
+  height: 70%;
   background: white;
   margin: 15vh auto;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   border-radius: 10px;
   display: flex;
+
+  // @include lg {
+  //   width: 60%;
+  //   height: 70%;
+  // }
 
   &__left,
   &__right {
@@ -68,19 +73,31 @@
 }
 
 .pikachu {
-  width: 15rem;
+  width: 65%;
 }
 
 .pokedex-logo {
   position: absolute;
-  bottom: 4rem;
-  right: 4rem;
-  width: 12rem;
+  bottom: 2rem;
+  right: 2rem;
+  width: 8%;
   transform: rotate(10deg);
   animation: pokedex-logo 0.6s infinite alternate linear;
   @keyframes pokedex-logo {
     to {
       transform: translate(0, 1rem) rotate(10deg);
     }
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-modal {
+    width: 60%;
+  }
+
+  .pokedex-logo {
+    bottom: 4rem;
+    right: 4rem;
+    width: 10%;
   }
 }
