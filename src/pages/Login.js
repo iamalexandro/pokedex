@@ -15,6 +15,12 @@ import pikachu from "../images/pikachu.png";
 
 export const Login = () => {
   const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   useEffect(() => {
     if (validateToken()) {
       navigate("/dashboard");
@@ -29,10 +35,6 @@ export const Login = () => {
     return token;
   };
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const validaterUser = async (username, password) => {
     setLoading(true);
 
@@ -58,7 +60,6 @@ export const Login = () => {
         const token = user.token;
         localStorage.setItem("token", token);
         Swal.fire({
-          position: "top-end",
           icon: "success",
           title: "Loggin Succesfull ✅ 🥰",
           showConfirmButton: false,
