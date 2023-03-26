@@ -33,7 +33,7 @@ export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [showPassword, setShowPassword] = useState(false);
   const validaterUser = async (username, password) => {
     setLoading(true);
 
@@ -46,24 +46,28 @@ export const Login = () => {
       setLoading(false);
     }, "500");
 
-    if (!user) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (!user) {
         Swal.fire("User not found 🤔");
-      }, 500);
-    } else if (user && !passwordValidated) {
-      setTimeout(() => {
+      } else if (user && !passwordValidated) {
         Swal.fire({
           icon: "error",
           title: "Oops... 🤒",
           text: "Wrong Password!",
         });
-      }, 500);
-    } else if (user && passwordValidated) {
-      const token = user.token;
-      localStorage.setItem("token", token);
-      localStorage.setItem("firstLoggin", true);
-      navigate("/dashboard");
-    }
+      } else if (user && passwordValidated) {
+        const token = user.token;
+        localStorage.setItem("token", token);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Loggin Succesfull ✅ 🥰",
+          showConfirmButton: false,
+          timer: 1000,
+        });
+        navigate("/dashboard");
+      }
+    }, 500);
   };
 
   const handleSubmit = (e) => {
@@ -83,22 +87,36 @@ export const Login = () => {
                 placeholder="youremail@gmail.com"
                 className="login-modal__input mt-5"
                 onChange={(e) => setUsername(e.target.value)}
-                // onChange={(e) => console.log(e.target.value)}
                 value={username}
               />
               <input
                 placeholder="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 className="login-modal__input mt-4"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
+              <div className="login-modal__checkbox">
+                <input
+                  type="checkbox"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="mt-4"
+                />
+                <span
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    marginLeft: "1rem",
+                  }}>
+                  Show Password
+                </span>
+              </div>
               {loading ? (
                 <div>
                   <Loader></Loader>
                 </div>
               ) : (
-                <button type="submit" className="login-modal__btn mt-5">
+                <button type="submit" className="login-modal__btn mt-2">
                   SIGN IN
                 </button>
               )}

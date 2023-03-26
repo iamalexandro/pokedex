@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 // import axios from "axios";
 
 export const Dashboard = () => {
@@ -15,26 +14,9 @@ export const Dashboard = () => {
     return () => {};
   }, [navigate]);
 
-  useEffect(() => {
-    if (localStorage.getItem("firstLoggin")) {
-      showLogginAlert();
-      localStorage.removeItem("firstLoggin");
-    }
-  });
-
   const validateToken = () => {
     const token = localStorage.getItem("token");
     return token;
-  };
-
-  const showLogginAlert = () => {
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Loggin Succesfull ✅ 🥰",
-      showConfirmButton: false,
-      timer: 1000,
-    });
   };
 
   const logOut = () => {
