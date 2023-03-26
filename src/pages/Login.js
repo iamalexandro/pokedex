@@ -14,7 +14,6 @@ import pokedex from "../images/poke.png";
 import pikachu from "../images/pikachu.png";
 
 export const Login = () => {
-  // let loading = false;
   const navigate = useNavigate();
   useEffect(() => {
     if (validateToken()) {
