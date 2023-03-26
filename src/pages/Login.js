@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import users from "../data/users";
-//libraries
+import Swal from "sweetalert2";
+import Loader from "../Loader";
 
 //styles
 import "./styles/Login.scss";
@@ -13,24 +14,54 @@ import pokedex from "../images/poke.png";
 import pikachu from "../images/pikachu.png";
 
 export const Login = () => {
+  // let loading = false;
   const navigate = useNavigate();
+  useEffect(() => {
+    if (validateToken()) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
+    return () => {};
+  }, [navigate]);
+
+  const validateToken = () => {
+    const token = localStorage.getItem("token");
+    return token;
+  };
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const validaterUser = (username, password) => {
-    const user = users.find((user) => user.username === username);
-    const passwordValidated = users.find((user) => user.password === password);
+  const validaterUser = async (username, password) => {
+    setLoading(true);
+
+    const user = await users.find((user) => user.username === username);
+    const passwordValidated = await users.find(
+      (user) => user.password === password
+    );
+
+    setTimeout(() => {
+      setLoading(false);
+    }, "500");
 
     if (!user) {
-      console.log("user not found");
+      setTimeout(() => {
+        Swal.fire("User not found 🤔");
+      }, 500);
     } else if (user && !passwordValidated) {
-      console.log("password wrong");
+      setTimeout(() => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops... 🤒",
+          text: "Wrong Password!",
+        });
+      }, 500);
     } else if (user && passwordValidated) {
-      console.log("user logged");
       const token = user.token;
       localStorage.setItem("token", token);
-      console.log("token: ", token);
+      localStorage.setItem("firstLoggin", true);
       navigate("/dashboard");
     }
   };
@@ -62,9 +93,15 @@ export const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
               />
-              <button type="submit" className="login-modal__btn mt-5">
-                SIGN IN
-              </button>
+              {loading ? (
+                <div>
+                  <Loader></Loader>
+                </div>
+              ) : (
+                <button type="submit" className="login-modal__btn mt-5">
+                  SIGN IN
+                </button>
+              )}
             </form>
           </div>
         </div>
