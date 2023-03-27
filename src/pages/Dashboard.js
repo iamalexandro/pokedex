@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
+import Swal from "sweetalert2";
+// import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 //styles
 import "../index.scss";
@@ -13,6 +14,10 @@ import pokeball from "../images/pokeball.png";
 export const Dashboard = () => {
   const navigate = useNavigate();
 
+  const [pokemonList, setPokemonList] = useState([]);
+  const [page, setPage] = useState(1);
+  const [pokemonSelected, setPokemonSelected] = useState();
+
   useEffect(() => {
     if (validateToken()) {
       navigate("/dashboard");
@@ -21,20 +26,6 @@ export const Dashboard = () => {
     }
     return () => {};
   }, [navigate]);
-
-  const validateToken = () => {
-    const token = localStorage.getItem("token");
-    return token;
-  };
-
-  const logOut = () => {
-    localStorage.clear();
-    navigate("/login");
-    console.log("You clicked");
-  };
-
-  const [pokemonList, setPokemonList] = useState([]);
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     validateToken();
@@ -47,11 +38,22 @@ export const Dashboard = () => {
     return () => {};
   }, [page]);
 
+  const validateToken = () => {
+    const token = localStorage.getItem("token");
+    return token;
+  };
+
+  const logOut = () => {
+    localStorage.clear();
+    navigate("/login");
+    console.log("You clicked");
+  };
+
   const bringPokemons = async (page) => {
     try {
       const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${
-          page == 1 ? 0 : page * 10 - 10
+          page === 1 ? 0 : page * 10 - 10
         }`
       );
       const results = res.data.results;
@@ -84,6 +86,20 @@ export const Dashboard = () => {
     });
   };
 
+  const showPokemonInfo = (name, weight, img) => {
+    console.log("this pokemon: ", name);
+
+    Swal.fire({
+      title: name,
+      text: `Weight: ${weight}`,
+      imageUrl: img,
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Pokemon image",
+      backdrop: `rgba(0, 0, 0, 0.8)`,
+    });
+  };
+
   return (
     <div>
       {/* /navbar */}
@@ -109,7 +125,16 @@ export const Dashboard = () => {
       {/* Cards  */}
       <div className="cards flex flex-wrap m-auto p-6 justify-center">
         {pokemonList.map((p) => (
-          <div className="card w-full md:w-2/4 lg:w-1/3  mx-2 h-96 bg-gray-300">
+          // Card
+          <div
+            className="card w-full md:w-2/4 lg:w-1/3  mx-2 h-96 bg-gray-300"
+            onClick={() =>
+              showPokemonInfo(
+                p.name,
+                p.weight,
+                p.sprites.other.dream_world.front_default
+              )
+            }>
             <div
               className="card__image w-25 h-full relative"
               style={{
@@ -132,6 +157,7 @@ export const Dashboard = () => {
             </div>
           </div>
         ))}
+        {/* Pagination */}
         <div className="pagination flex w-full h-8 justify-center">
           <button
             className="btn-pag btn-pag--first btn-pag__active"
