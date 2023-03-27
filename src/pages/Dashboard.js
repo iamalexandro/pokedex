@@ -50,8 +50,6 @@ export const Dashboard = () => {
     return () => {};
   }, []);
 
-  useEffect(() => {}, [pokemonList]);
-
   const bringPokemons = async () => {
     try {
       const res = await axios.get(
@@ -119,36 +117,33 @@ export const Dashboard = () => {
         </div>
       </nav>
       {/* card */}
-      <div className="cards flex container m-auto p-6 justify-center">
-        {pokemonList.map((p) => {
+      <div className="cards flex flex-wrap container m-auto p-6 justify-center">
+        {pokemonList.map((p) => (
           // console.log("name", p.name);
           // console.log(p.weight);
-          // console.log(p.photo);
           <div className="card w-full md:w-2/4 lg:w-1/3  mx-2 h-96 bg-gray-300">
             <div
               className="card__image w-25 h-full relative"
-              style={
-                {
-                  // backgroundImage: `url("${p.photo}")`,
-                }
-              }>
+              style={{
+                backgroundImage: `url("${p.sprites.other.dream_world.front_default}")`,
+              }}>
               <p className="card__name text-white font-bold absolute text-2xl">
-                {/* weight {p.weight} */}
+                weight {p.weight}
               </p>
             </div>
             <div className="card__info w-full h-32 p-5">
               <p className="font-bold text-4xl text-slate-600">{p.name}</p>
               <div className="flex">
                 <p className="text-md mt-4 text-slate-600">
-                  {/* {pokemon.moves[0]} */}
+                  👊🏻 {p.moves[0].move.name.replace("-", " ")}
                 </p>
-                <p className="text-md mt-4 ml-3 text-slate-600">
-                  {/* {pokemon.moves[1] ? pokemon.moves[1] : ""} */}
+                <p className="text-md mt-4 ml-5 text-slate-600">
+                  {p.moves[1] ? p.moves[1].move.name : ""}
                 </p>
               </div>
             </div>
-          </div>;
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );
