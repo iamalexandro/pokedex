@@ -52,24 +52,24 @@
     margin-top: 3rem;
   }
 
-  &__btn {
-    border-radius: 20px;
-    color: white;
-    font-weight: 600;
-    font-size: 18px;
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
-    border: none;
-    padding: 5px 30px;
-    transition: transform 0.3s;
+  // &__btn {
+  // border-radius: 20px;
+  // color: white;
+  // font-weight: 600;
+  // font-size: 18px;
+  // background: linear-gradient(to right, #ff4b2b, #ff416c);
+  // border: none;
+  // padding: 5px 30px;
+  // transition: transform 0.3s;
 
-    &:hover {
-      transition: transform 0.3s;
-      transform: scale(1.05);
-      border: solid 2px #ff416c;
-      background: white;
-      color: #ff416c;
-    }
-  }
+  // &:hover {
+  //   transition: transform 0.3s;
+  //   transform: scale(1.05);
+  //   border: solid 2px #ff416c;
+  //   background: white;
+  //   color: #ff416c;
+  // }
+  // }
 }
 
 .pikachu {

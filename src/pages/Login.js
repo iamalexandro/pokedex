@@ -7,10 +7,10 @@ import Loader from "../Loader";
 //styles
 import "./styles/Login.scss";
 import "../index.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 //sources
-import pokedex from "../images/poke.png";
+import pokedex from "../images/pokedex.png";
 import pikachu from "../images/pikachu.png";
 
 export const Login = () => {
@@ -37,7 +37,6 @@ export const Login = () => {
 
   const validaterUser = async (username, password) => {
     setLoading(true);
-
     const user = await users.find((user) => user.username === username);
     const passwordValidated = await users.find(
       (user) => user.password === password
@@ -116,7 +115,7 @@ export const Login = () => {
                   <Loader></Loader>
                 </div>
               ) : (
-                <button type="submit" className="login-modal__btn mt-2">
+                <button type="submit" className="own-btn mt-2">
                   SIGN IN
                 </button>
               )}
