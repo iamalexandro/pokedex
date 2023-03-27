@@ -7,7 +7,6 @@ import Loader from "../Loader";
 //styles
 import "./styles/Login.scss";
 import "../index.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 //sources
 import pokedex from "../images/pokedex.png";
@@ -77,7 +76,7 @@ export const Login = () => {
   return (
     <div className="login">
       <div className="login-modal">
-        <div className="col-6 login-modal__left center title">
+        <div className="w-1/2 login-modal__left center title w-full">
           <div className="login-modal__form">
             <span>Sign in</span>
             <form onSubmit={handleSubmit}>
@@ -122,7 +121,7 @@ export const Login = () => {
             </form>
           </div>
         </div>
-        <div className="col-6 login-modal__right center text">
+        <div className="w-1/2 login-modal__right center text">
           <div className="login-modal__form title">
             <span>Hello, Master!</span>
             <div className="login-modal__subtitle">

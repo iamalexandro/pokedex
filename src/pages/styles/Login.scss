@@ -90,6 +90,16 @@
   }
 }
 
+@media (max-width: 768px) {
+  .login-modal__right {
+    display: none;
+  }
+  .login-modal__left {
+    padding-top: 6rem;
+    width: 100%;
+  }
+}
+
 @media (min-width: 1200px) {
   .login-modal {
     width: 60%;
