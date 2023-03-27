@@ -30,10 +30,11 @@ export const Dashboard = () => {
   const logOut = () => {
     localStorage.clear();
     navigate("/login");
+    console.log("You clicked");
   };
 
   const [pokemonList, setPokemonList] = useState([]);
-  // const [page, setPage] = useState();
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     validateToken();
@@ -41,14 +42,17 @@ export const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    bringPokemons();
+    bringPokemons(page);
+    handlePageChange(page);
     return () => {};
-  }, []);
+  }, [page]);
 
-  const bringPokemons = async () => {
+  const bringPokemons = async (page) => {
     try {
       const res = await axios.get(
-        "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"
+        `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${
+          page == 1 ? 0 : page * 10 - 10
+        }`
       );
       const results = res.data.results;
       const pokemonData = await Promise.all(
@@ -64,7 +68,21 @@ export const Dashboard = () => {
     }
   };
 
-  const handlePage = (page) => {};
+  const cleanActivePageButton = () => {
+    let activeBtn = document.querySelector(".btn-pag__active");
+    activeBtn.classList.remove("btn-pag__active");
+  };
+
+  const handlePageChange = (page) => {
+    cleanActivePageButton();
+    let btnToActive =
+      document.querySelector(".pagination").childNodes[page - 1];
+    btnToActive.classList.add("btn-pag__active");
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <div>
@@ -89,7 +107,7 @@ export const Dashboard = () => {
       </nav>
 
       {/* Cards  */}
-      <div className="cards flex flex-wrap container m-auto p-6 justify-center">
+      <div className="cards flex flex-wrap m-auto p-6 justify-center">
         {pokemonList.map((p) => (
           <div className="card w-full md:w-2/4 lg:w-1/3  mx-2 h-96 bg-gray-300">
             <div
@@ -114,78 +132,24 @@ export const Dashboard = () => {
             </div>
           </div>
         ))}
-      </div>
-
-      <div className="pagination">
-        <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
-          <div className="flex flex-1 justify-between sm:hidden">
-            <a
-              href="#"
-              className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-              Previous
-            </a>
-            <a
-              href="#"
-              className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
-              Next
-            </a>
-          </div>
-          <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-            <div>
-              <p className="text-sm text-gray-700">
-                Showing <span className="font-medium">1</span> to{" "}
-                <span className="font-medium">10</span> of{" "}
-                <span className="font-medium">50</span> results
-              </p>
-            </div>
-            <div>
-              <nav
-                className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-                aria-label="Pagination">
-                <a
-                  href="#"
-                  className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                  <span className="sr-only">Previous</span>
-                  <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                </a>
-                {/* current = "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" */}
-                {/* disable = "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex" */}
-
-                <button
-                  onClick={handlePage(1)}
-                  className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                  1
-                </button>
-                <button
-                  onClick={handlePage(2)}
-                  className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">
-                  2
-                </button>
-                <a
-                  href="#"
-                  aria-current="page"
-                  className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">
-                  3
-                </a>
-                <a
-                  href="#"
-                  className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">
-                  4
-                </a>
-                <a
-                  href="#"
-                  className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                  5
-                </a>
-                <a
-                  href="#"
-                  className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                  <span className="sr-only">Next</span>
-                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-                </a>
-              </nav>
-            </div>
-          </div>
+        <div className="pagination flex w-full h-8 justify-center">
+          <button
+            className="btn-pag btn-pag--first btn-pag__active"
+            onClick={() => setPage(1)}>
+            1
+          </button>
+          <button className="btn-pag" onClick={() => setPage(2)}>
+            2
+          </button>
+          <button className="btn-pag" onClick={() => setPage(3)}>
+            3
+          </button>
+          <button className="btn-pag" onClick={() => setPage(4)}>
+            4
+          </button>
+          <button className="btn-pag" onClick={() => setPage(5)}>
+            5
+          </button>
         </div>
       </div>
     </div>

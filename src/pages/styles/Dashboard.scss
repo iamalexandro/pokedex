@@ -1,5 +1,8 @@
 .cards {
-  padding-bottom: 4rem;
+  background-color: white;
+  border-radius: 20px;
+  margin: 4rem 5rem;
+  padding: 2rem;
 }
 .card {
   background: linear-gradient(to left, #f2917f, #ff416c);
@@ -13,7 +16,7 @@
   transform: scale(1);
   &:hover {
     transition: transform 0.2s;
-    transform: scale(1.02);
+    transform: scale(1.06);
   }
 
   &__name {
@@ -23,11 +26,6 @@
   }
 
   &__image {
-    //for normal sprites
-    // background-size: cover;
-    // background-position-y: -65px;
-    // background-position-x: -14px;
-    // for dream world sprites
     background-size: contain;
     background-repeat: no-repeat;
   }
@@ -41,9 +39,7 @@
     border-radius: 0 0 18px 18px;
   }
 }
-
 .pagination {
-  position: fixed;
   bottom: 0;
-  width: 100vw;
+  margin: 2rem 2rem;
 }

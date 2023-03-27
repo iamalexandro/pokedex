@@ -9,6 +9,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  // background-color: #ff416c;
+  background: linear-gradient(to left, #f2917f, #ff416c);
 }
 
 code {
@@ -18,6 +20,10 @@ code {
 
 .center {
   text-align: center;
+}
+
+.no-margin {
+  margin: 0;
 }
 
 .title {
@@ -52,10 +58,43 @@ code {
   transition: transform 0.3s;
 
   &:hover {
-    transition: transform 0.3s;
     transform: scale(1.05);
+    transition: transform 0.3s;
     border: solid 2px #ff416c;
     background: white;
     color: #ff416c;
+  }
+}
+
+.btn-pag {
+  transform: scale(1.3);
+  transition: all 0.2s;
+  margin-left: 2rem;
+  font-weight: 800;
+  border-radius: 30px;
+  border: none;
+  padding: 0rem 12px;
+  background: rgb(228, 225, 225);
+  color: #ff416c;
+  &:hover {
+    transform: scale(1.5);
+    transition: transform 0.2s;
+    color: white;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+  }
+
+  &__active {
+    color: white;
+    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    &:hover {
+      transform: scale(1.3);
+      transition: transform 0.2s;
+      color: white;
+      background: linear-gradient(to right, #ff4b2b, #ff416c);
+    }
+  }
+
+  &--first {
+    margin-left: 0;
   }
 }
