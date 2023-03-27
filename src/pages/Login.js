@@ -7,7 +7,7 @@ import Loader from "../Loader";
 //styles
 import "./styles/Login.scss";
 import "../index.scss";
-// import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 //sources
 import pokedex from "../images/pokedex.png";
