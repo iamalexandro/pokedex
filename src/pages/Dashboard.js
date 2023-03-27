@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 //styles
 import "../index.scss";
@@ -31,14 +32,8 @@ export const Dashboard = () => {
     navigate("/login");
   };
 
-  const [pokemon, setPokemon] = useState({
-    name: "",
-    photo: "",
-    moves: [],
-    weight: "",
-  });
-
   const [pokemonList, setPokemonList] = useState([]);
+  // const [page, setPage] = useState();
 
   useEffect(() => {
     validateToken();
@@ -64,40 +59,16 @@ export const Dashboard = () => {
       );
 
       setPokemonList(pokemonData);
-      // addPokemonsToList(pokemonListFetch);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
-  const addPokemonsToList = async (pokemonListFetch) => {
-    let pokemonData = [];
-    try {
-      pokemonListFetch.map(async (p) => {
-        const res = await axios.get(p.url);
-        console.log(p);
-
-        const move1 = res.data.moves[0].move.name;
-        const move2 = res.data.moves[1] ? res.data.moves[1].move.name : null;
-
-        const pokemon = {
-          name: res.data.name,
-          photo: res.data.sprites.front_default,
-          moves: [move1, move2],
-          weight: res.data.weight,
-        };
-        // console.log(pokemon);
-        pokemonData.push(pokemon);
-      });
-      console.log(pokemonData);
-      setPokemonList(pokemonData);
-    } catch (error) {
-      // console.log(error);
-    }
-  };
+  const handlePage = (page) => {};
 
   return (
     <div>
+      {/* /navbar */}
       <nav className="bg-gray-300 py-3 shadow-md">
         <div className="flex justify-between mx-6">
           <div className="flex w-60">
@@ -116,11 +87,10 @@ export const Dashboard = () => {
           </div>
         </div>
       </nav>
-      {/* card */}
+
+      {/* Cards  */}
       <div className="cards flex flex-wrap container m-auto p-6 justify-center">
         {pokemonList.map((p) => (
-          // console.log("name", p.name);
-          // console.log(p.weight);
           <div className="card w-full md:w-2/4 lg:w-1/3  mx-2 h-96 bg-gray-300">
             <div
               className="card__image w-25 h-full relative"
@@ -144,6 +114,79 @@ export const Dashboard = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="pagination">
+        <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
+          <div className="flex flex-1 justify-between sm:hidden">
+            <a
+              href="#"
+              className="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+              Previous
+            </a>
+            <a
+              href="#"
+              className="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+              Next
+            </a>
+          </div>
+          <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+            <div>
+              <p className="text-sm text-gray-700">
+                Showing <span className="font-medium">1</span> to{" "}
+                <span className="font-medium">10</span> of{" "}
+                <span className="font-medium">50</span> results
+              </p>
+            </div>
+            <div>
+              <nav
+                className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+                aria-label="Pagination">
+                <a
+                  href="#"
+                  className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                  <span className="sr-only">Previous</span>
+                  <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
+                </a>
+                {/* current = "relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" */}
+                {/* disable = "relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex" */}
+
+                <button
+                  onClick={handlePage(1)}
+                  className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  1
+                </button>
+                <button
+                  onClick={handlePage(2)}
+                  className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">
+                  2
+                </button>
+                <a
+                  href="#"
+                  aria-current="page"
+                  className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">
+                  3
+                </a>
+                <a
+                  href="#"
+                  className="relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">
+                  4
+                </a>
+                <a
+                  href="#"
+                  className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                  5
+                </a>
+                <a
+                  href="#"
+                  className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
+                  <span className="sr-only">Next</span>
+                  <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
+                </a>
+              </nav>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
