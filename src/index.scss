@@ -42,7 +42,7 @@ code {
 }
 
 .credits {
-  position: fixed;
+  position: absolute;
   bottom: 1.5rem;
   left: 2rem;
 }
@@ -66,6 +66,7 @@ code {
   }
 }
 
+//aply media query hover > 768px
 .btn-pag {
   transform: scale(1.3);
   transition: all 0.2s;
@@ -76,25 +77,32 @@ code {
   padding: 0rem 12px;
   background: rgb(228, 225, 225);
   color: #ff416c;
-  &:hover {
-    transform: scale(1.5);
-    transition: transform 0.2s;
-    color: white;
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
-  }
 
   &__active {
     color: white;
     background: linear-gradient(to right, #ff4b2b, #ff416c);
-    &:hover {
-      transform: scale(1.3);
-      transition: transform 0.2s;
-      color: white;
-      background: linear-gradient(to right, #ff4b2b, #ff416c);
-    }
   }
 
   &--first {
     margin-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-pag {
+    &:hover {
+      transform: scale(1.5);
+      transition: transform 0.2s;
+      color: white;
+      background: linear-gradient(to right, #ff4b2b, #ff416c);
+    }
+    &__active {
+      &:hover {
+        transform: scale(1.3);
+        transition: transform 0.2s;
+        color: white;
+        background: linear-gradient(to right, #ff4b2b, #ff416c);
+      }
+    }
   }
 }

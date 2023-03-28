@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import users from "../data/users";
 import Swal from "sweetalert2";
+import axios from "axios";
 import Loader from "../Loader";
 
 //styles
@@ -15,7 +15,7 @@ import pikachu from "../images/pikachu.png";
 export const Login = () => {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -30,14 +30,16 @@ export const Login = () => {
   }, [navigate]);
 
   const validateToken = () => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     return token;
   };
 
-  const validaterUser = async (username, password) => {
+  const validaterUser = async (email, password) => {
     setLoading(true);
-    const user = await users.find((user) => user.username === username);
-    const passwordValidated = await users.find(
+    const res = await axios.get("users.json");
+    const data = res.data.users;
+    const user = await data.find((user) => user.email === email);
+    const passwordValidated = await data.find(
       (user) => user.password === password
     );
 
@@ -45,32 +47,34 @@ export const Login = () => {
       setLoading(false);
     }, "500");
 
-    setTimeout(() => {
-      if (!user) {
-        Swal.fire("User not found 🤔");
-      } else if (user && !passwordValidated) {
-        Swal.fire({
-          icon: "error",
-          title: "Oops... 🤒",
-          text: "Wrong Password!",
-        });
-      } else if (user && passwordValidated) {
-        const token = user.token;
-        localStorage.setItem("token", token);
-        Swal.fire({
-          icon: "success",
-          title: "Loggin Succesfull ✅ 🥰",
-          showConfirmButton: false,
-          timer: 1000,
-        });
-        navigate("/dashboard");
-      }
-    }, 500);
+    if (!user) {
+      Swal.fire("User not found 🤔");
+    } else if (user && !passwordValidated) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops... 🤒",
+        text: "Wrong Password!",
+      });
+    } else if (user && passwordValidated) {
+      const token = user.token;
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("name", user.name);
+      sessionStorage.setItem("email", user.email);
+      sessionStorage.setItem("level", user.level);
+      sessionStorage.setItem("avatar", user.avatar);
+      Swal.fire({
+        icon: "success",
+        title: "Loggin Succesfull ✅ 🥰",
+        showConfirmButton: false,
+        timer: 1000,
+      });
+      navigate("/dashboard");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validaterUser(username, password);
+    validaterUser(email, password);
   };
 
   return (
@@ -84,8 +88,8 @@ export const Login = () => {
                 type="email"
                 placeholder="youremail@gmail.com"
                 className="login-modal__input mt-5"
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
+                onChange={(e) => setemail(e.target.value)}
+                value={email}
               />
               <input
                 placeholder="Password"
@@ -114,7 +118,7 @@ export const Login = () => {
                   <Loader></Loader>
                 </div>
               ) : (
-                <button type="submit" className="own-btn mt-2">
+                <button type="submit" className="own-btn own-btn__hover mt-2">
                   SIGN IN
                 </button>
               )}

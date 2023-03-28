@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Loader from "../Loader";
 
 //styles
 import "../index.scss";
 import "./styles/Dashboard.scss";
 
 //images
-import pokeball from "../images/pokeball.png";
+import Nav from "../components/Nav";
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export const Dashboard = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [page, setPage] = useState(1);
   const [pokemonSelected, setPokemonSelected] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (validateToken()) {
@@ -38,17 +40,12 @@ export const Dashboard = () => {
   }, [page]);
 
   const validateToken = () => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     return token;
   };
 
-  const logOut = () => {
-    localStorage.clear();
-    navigate("/login");
-    console.log("You clicked");
-  };
-
   const bringPokemons = async (page) => {
+    setLoading(true);
     try {
       const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon?limit=10&offset=${
@@ -62,7 +59,7 @@ export const Dashboard = () => {
           return res.data;
         })
       );
-
+      setLoading(false);
       setPokemonList(pokemonData);
     } catch (error) {
       console.log(error);
@@ -116,64 +113,52 @@ export const Dashboard = () => {
 
   return (
     <div>
-      {/* /navbar */}
-      <nav className="bg-gray-300 py-3 shadow-md">
-        <div className="flex justify-between mx-6">
-          <div className="flex w-50">
-            <img
-              className="pokeball"
-              src={pokeball}
-              alt="icon"
-              style={{ width: "3rem" }}
-            />
-            <p className="my-auto ml-4 font-bold text-xl">Pokedex</p>
-          </div>
-          <div className="my-auto">
-            <button className="own-btn" onClick={logOut}>
-              Log out
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Cards  */}
+      <Nav />
+      {/* cards  */}
       <div className="cards flex flex-wrap m-auto p-6 justify-center">
-        {pokemonList.map((p) => (
-          // Card
-          <div
-            className="card w-full md:w-2/4 lg:w-1/3  mx-2 h-96 bg-gray-300"
-            onClick={() =>
-              showPokemonInfo(
-                p.name,
-                p.weight,
-                p.sprites.other.dream_world.front_default,
-                p.moves[0].move.name,
-                p.stats[0].stat.name,
-                p.stats[0].base_stat
-              )
-            }>
+        {loading ? (
+          <div className="mb-4">
+            <Loader />
+          </div>
+        ) : (
+          pokemonList.map((p) => (
+            // Card
             <div
-              className="card__image w-25 h-full relative"
-              style={{
-                backgroundImage: `url("${p.sprites.other.dream_world.front_default}")`,
-              }}>
-              <p className="card__name text-white font-bold absolute text-2xl">
-                weight {p.weight}
-              </p>
-            </div>
-            <div className="card__info w-full h-32 p-5">
-              <p className="font-bold text-4xl text-slate-600">{p.name}</p>
-              <div className="flex">
-                <p className="text-md mt-4 text-slate-600">
-                  👊🏻 {p.moves[0].move.name.replace("-", " ")}
-                </p>
-                <p className="text-md mt-4 ml-5 text-slate-600">
-                  {p.moves[1] ? p.moves[1].move.name : ""}
+              className="card w-full md:w-2/4 lg:w-1/3  mx-2 h-96 bg-gray-300"
+              onClick={() =>
+                showPokemonInfo(
+                  p.name,
+                  p.weight,
+                  p.sprites.other.dream_world.front_default,
+                  p.moves[0].move.name,
+                  p.stats[0].stat.name,
+                  p.stats[0].base_stat
+                )
+              }>
+              <div
+                className="card__image w-25 h-full relative"
+                style={{
+                  backgroundImage: `url("${p.sprites.other.dream_world.front_default}")`,
+                }}>
+                <p className="card__name text-white font-bold absolute text-2xl">
+                  weight {p.weight}
                 </p>
               </div>
+              <div className="card__info w-full h-32 p-5">
+                <p className="font-bold text-4xl text-slate-600">{p.name}</p>
+                <div className="flex">
+                  <p className="text-md mt-4 text-slate-600">
+                    👊🏻 {p.moves[0].move.name.replace("-", " ")}
+                  </p>
+                  <p className="text-md mt-4 ml-5 text-slate-600">
+                    {p.moves[1] ? p.moves[1].move.name : ""}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
+
         {/* Pagination */}
         <div className="pagination flex w-full h-8 justify-center">
           <button

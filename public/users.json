@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "name": "Fredy Mercury",
+      "level": "80",
+      "email": "fredymercury@gmail.com",
+      "password": "fredthebest",
+      "avatar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRD4bYqWHSNpWw5i68go6o4XeS1-XkYV1VBkw&usqp=CAU",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    },
+    {
+      "name": "Ash",
+      "level": "80",
+      "email": "ash@gmail.com",
+      "password": "ashmaster",
+      "avatar": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/79f4e5bc-ee11-49fd-a9a4-5bdb63206b27/d9y7tzy-6e5389e9-0b19-4a58-ac84-0b7eb4b1530f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzc5ZjRlNWJjLWVlMTEtNDlmZC1hOWE0LTViZGI2MzIwNmIyN1wvZDl5N3R6eS02ZTUzODllOS0wYjE5LTRhNTgtYWM4NC0wYjdlYjRiMTUzMGYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.MrbheE3mHx5EXyeQTUImSuxCPNAoCT1veaIwhI845uQ",
+      "token": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.bQTnz6AuMJvmXXQsVPrxeQNvzDkimo7VNXxHeSBfClLufmCVZRUuyTwJF311JHuh"
+    },
+    {
+      "name": "Naruto",
+      "level": "80",
+      "email": "narutohokage@gmail.com",
+      "password": "naruto123",
+      "acatar": "https://alfabetajuega.com/hero/2020/12/naruto-okay.jpg?width=1200",
+      "token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.NHVaYe26MbtOYhSKkoKYdFVomg4i8ZJd8_-RU8VNbftc4TSMb4bXP3l3YlNWACwyXPGffz5aXHc6lty1Y2t4SWRqGteragsVdZufDn5BlnJl9pdR_kdVFUsra2rWKEofkZeIC4yWytE58sMIihvo9H1ScmmVwBcQP6XETqYd0aSHp1gOa9RdUPDvoXQ5oqygTqVtxaDr6wUFKrKItgBMzWIdNZ6y7O9E0DhEPTbE9rfBo6KTFsHAZnMg4k68CDp2woYIaXbmYTWcvbzIuHO7_37GT79XdIwkm95QJ7hYC9RiwrV7mesbY4PAahERJawntho0my942XheVLmGwLMBkQ"
+    }
+  ]
+}
