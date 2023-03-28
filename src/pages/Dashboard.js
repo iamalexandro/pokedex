@@ -119,7 +119,7 @@ export const Dashboard = () => {
       {/* /navbar */}
       <nav className="bg-gray-300 py-3 shadow-md">
         <div className="flex justify-between mx-6">
-          <div className="flex w-60">
+          <div className="flex w-50">
             <img
               className="pokeball"
               src={pokeball}
