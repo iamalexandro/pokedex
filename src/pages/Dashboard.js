@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
-// import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 //styles
 import "../index.scss";
@@ -86,12 +85,27 @@ export const Dashboard = () => {
     });
   };
 
-  const showPokemonInfo = (name, weight, img) => {
+  const showPokemonInfo = (name, weight, img, move, powerName, power) => {
     console.log("this pokemon: ", name);
 
     Swal.fire({
-      title: name,
+      title: `<b>${name}</b>`,
+      confirmButtonColor: "#ff2b4e",
+      confirmButtonText: "Close",
       text: `Weight: ${weight}`,
+      html: `<div style="display: flex;align-items: center;flex-direction: column;">
+          <div class="first" style="display:flex; align-items: center;">
+          <div style="width:3rem;height:1rem;background:#ffa400;border-radius:20px"></div>
+          <p style="margin:.3rem">Weigth: <b>${weight}</b></p></div>
+          <div class="first" style="display:flex;align-items: center;">
+          <div style="width:1.5rem;height:1rem;background:#3ef60a;border-radius:20px;"></div>
+          <p style="margin:.3rem">Main move: <b>${move}</b></p></div>
+          <div class="first" style="display:flex; align-items: center;">
+          <div style="width:2rem;height:1rem;background:#00baff;border-radius:20px"></div>
+          <p style="margin:.3rem">Main stat: <b>${powerName}</b></p></div>
+          <div class="first" style="display:flex; align-items: center;">
+          <div style="width:2rem;height:1rem;background:#f27474;border-radius:20px"></div>
+          <p style="margin:.3rem">Stat power: <b>${power}</b></p></div></div>`,
       imageUrl: img,
       imageWidth: 400,
       imageHeight: 200,
@@ -132,7 +146,10 @@ export const Dashboard = () => {
               showPokemonInfo(
                 p.name,
                 p.weight,
-                p.sprites.other.dream_world.front_default
+                p.sprites.other.dream_world.front_default,
+                p.moves[0].move.name,
+                p.stats[0].stat.name,
+                p.stats[0].base_stat
               )
             }>
             <div
