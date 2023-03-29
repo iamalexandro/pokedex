@@ -40,7 +40,7 @@ export const Nav = () => {
       title: `Hey, <b>${user.name}!</b>`,
       confirmButtonColor: "#ff2b4e",
       confirmButtonText: "Close",
-      html: `<p style="margin:.4rem">email <b>${user.email}</b></p>
+      html: `<p id="profile-email" style="margin:.4rem">email <b>${user.email}</b></p>
       <div style="display: flex;align-items: center;flex-direction: column;">
       <div class="first" style="display:flex; align-items: center;">
       <div style="width:2.4rem;height:1rem;background:#10f014;border-radius:20px"></div>
@@ -91,14 +91,15 @@ export const Nav = () => {
               <div className="navbar__menu">
                 <div className="self-center">
                   <button
+                    id="profile-btn"
                     onClick={handleShowInfo}
-                    className="own-btn h-auto mb-3">
+                    className="own-btn h-auto mb-3 w-full">
                     Profile
                   </button>
                 </div>
                 <div className="self-center">
                   <button
-                    className="own-btn own-btn__logout h-auto"
+                    className="own-btn own-btn__logout h-auto w-full"
                     onClick={logOut}>
                     Log out
                   </button>

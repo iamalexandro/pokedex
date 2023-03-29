@@ -85,6 +85,7 @@ export const Login = () => {
             <span>Sign in</span>
             <form onSubmit={handleSubmit}>
               <input
+                id="input-email"
                 type="email"
                 placeholder="youremail@gmail.com"
                 className="login-modal__input mt-5"
@@ -92,6 +93,7 @@ export const Login = () => {
                 value={email}
               />
               <input
+                id="input-password"
                 placeholder="Password"
                 type={showPassword ? "text" : "password"}
                 className="login-modal__input mt-4"
@@ -118,7 +120,10 @@ export const Login = () => {
                   <Loader></Loader>
                 </div>
               ) : (
-                <button type="submit" className="own-btn own-btn__hover mt-2">
+                <button
+                  id="login-btn"
+                  type="submit"
+                  className="own-btn own-btn__hover mt-2">
                   SIGN IN
                 </button>
               )}
