@@ -20,18 +20,8 @@ export const Dashboard = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (validateToken()) {
-      navigate("/dashboard");
-    } else {
-      navigate("/login");
-    }
-    return () => {};
-  }, [navigate]);
-
-  useEffect(() => {
     validateToken();
-    return () => {};
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     bringPokemons(page);
@@ -41,7 +31,11 @@ export const Dashboard = () => {
 
   const validateToken = () => {
     const token = sessionStorage.getItem("token");
-    return token;
+    if (token) {
+      navigate("/dashboard");
+    } else {
+      navigate("/login");
+    }
   };
 
   const bringPokemons = async (page) => {
@@ -83,8 +77,6 @@ export const Dashboard = () => {
   };
 
   const showPokemonInfo = (name, weight, img, move, powerName, power) => {
-    console.log("this pokemon: ", name);
-
     Swal.fire({
       title: `<b>${name}</b>`,
       confirmButtonColor: "#ff2b4e",
@@ -112,7 +104,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="dashboard">
       <Nav />
       {/* cards  */}
       <div className="cards flex flex-wrap m-auto p-6 justify-center">
