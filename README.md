@@ -4,9 +4,10 @@ This project is a Pokedex replic that shows some Pokemons with their details and
 
 ## Demo 👀
 
-_you can access to a live demo in this [link](https://phenomenal-queijadas-4927bc.netlify.app/login)_
+_you can access to a live demo in this [link]([https://phenomenal-queijadas-4927bc.netlify.app/login](https://pokenico.netlify.app/login))_
 * User: fredymercury@gmail.com
 * Password: fredthebest
+_Optimized for Mobile Devices 📱_
 
 ## Build with 🛠️
 
