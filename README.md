@@ -2,6 +2,13 @@
 
 This project is a Pokedex replic that shows some Pokemons with their details and is being created with React and Tailwind.
 
+## Demo 👀
+
+_You can access to a live demo in this [link](https://pokenico.netlify.app) (optimized📱)_
+
+- User: ash@gmail.com
+- Password: ashmaster
+
 ## Getting Started 🚀
 
 ```
@@ -15,13 +22,6 @@ npm run start
 ```
 npx cypress open
 ```
-
-## Demo 👀
-
-_You can access to a live demo in this [link](https://pokenico.netlify.app) (optimized📱)_
-
-- User: ash@gmail.com
-- Password: ashmaster
 
 ## Build with 🛠️
 
